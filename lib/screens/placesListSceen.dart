@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, file_names
 
+import 'package:explorer/screens/addPlacesScreen.dart';
 import 'package:flutter/material.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -10,7 +11,12 @@ class PlacesListScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
       title: Text('Explorer'),
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+      actions: [
+        IconButton(
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AddPlaceScreen.routeName),
+            icon: Icon(Icons.add))
+      ],
     ));
   }
 }
