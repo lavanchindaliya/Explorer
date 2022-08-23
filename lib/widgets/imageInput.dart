@@ -3,6 +3,8 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as syspaths;
 
 class ImputImage extends StatefulWidget {
   ImputImage({Key? key}) : super(key: key);
@@ -15,10 +17,13 @@ class _ImputImageState extends State<ImputImage> {
   File? storedImage;
   Future<void> _takePicture() async {
     final imageFile = await ImagePicker()
-        .pickImage(source: ImageSource.camera, maxWidth: 600, maxHeight: 600);
+        .pickImage(source: ImageSource.camera, maxWidth: 600, maxHeight: 400);
     setState(() {
       storedImage = File(imageFile!.path);
     });
+    final appDir = await syspaths.getApplicationDocumentsDirectory();
+    final fileName = path.basename(imageFile!.path);
+    final savedImage = await imageFile.saveTo('${appDir.path}/$fileName');
   }
 
   @override
