@@ -7,7 +7,8 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
 
 class ImputImage extends StatefulWidget {
-  ImputImage({Key? key}) : super(key: key);
+  final Function onSelectImage;
+  ImputImage(this.onSelectImage);
 
   @override
   State<ImputImage> createState() => _ImputImageState();
@@ -24,6 +25,7 @@ class _ImputImageState extends State<ImputImage> {
     final appDir = await syspaths.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile!.path);
     final savedImage = await imageFile.saveTo('${appDir.path}/$fileName');
+    widget.onSelectImage(File(imageFile.path));
   }
 
   @override
