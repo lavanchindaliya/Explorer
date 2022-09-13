@@ -27,7 +27,6 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     if (_titeController.text.isEmpty || _pickedImage == null) return;
     Provider.of<Places>(context, listen: false)
         .addPlace(_titeController.text, _pickedImage!);
-    print("till now perfect");
     Navigator.of(context).pop();
   }
 

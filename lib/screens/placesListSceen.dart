@@ -24,16 +24,18 @@ class PlacesListScreen extends StatelessWidget {
         child: Center(
           child: Text("Nothing here"),
         ),
-        builder: (context, places, child) => places.item.length <= 0
-            ? ListView.builder(
+        builder: (context, places, child) => places.item.isEmpty
+            ? child!
+            : ListView.builder(
                 itemCount: places.item.length,
-                itemBuilder: ((context, index) => ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: FileImage(places.item[index].image),
-                      ),
-                      title: Text(places.item[index].titile),
-                    )))
-            : child!,
+                itemBuilder: ((context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: FileImage(places.item[index].image),
+                    ),
+                    title: Text(places.item[index].titile),
+                  );
+                })),
       ),
     );
   }
